@@ -40,7 +40,7 @@ public class AmortizationService {
 			
 			numberOfPayments = numberOfPayments -1;
 			
-			LoanBalanceData loanBalance = new LoanBalanceData(monthlyPayment, monthlyInterestPaid, monthlyPrinciplePaid, newPrinciple, numberOfPayments);
+			LoanBalanceData loanBalance = new LoanBalanceData(this.roundOff(monthlyPayment), this.roundOff(monthlyInterestPaid), this.roundOff(monthlyPrinciplePaid), this.roundOff(newPrinciple), numberOfPayments);
 			
 				System.out.print(" Monthly Payment: "+ monthlyPayment);
 				System.out.print(" Monthly Interest Paid: "+ monthlyInterestPaid);
@@ -51,6 +51,10 @@ public class AmortizationService {
 				loanBalancePerYear.add(loanBalance);
 		}
 		return loanBalancePerYear;
+	}
+	
+	private Double roundOff(Double value){
+		return Math.round(value*100)/100D;
 	}
 	
 	private Double calculateMonthlyPrinciplePaid(Double monthlyPayment, Double monthlyInterestPaid) {
